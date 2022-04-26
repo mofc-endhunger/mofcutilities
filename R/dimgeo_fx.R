@@ -61,7 +61,7 @@ figure_last_digit <- function(input, precision){
 #' round_lat_long(-84.82549, 4)
 #' @export
 
-round_lat_long <- function(input, dim_geo_level){
+round_lat_long = function(input, dim_geo_level){
   # round_lat_long(input, dim_geo_level)
   #This function Rounds an input lat/long to the appropriate dim_geo_level
   #  e.g. -84.82549 becomes -84.827 at dim_geo_level 4
@@ -99,17 +99,17 @@ round_lat_long <- function(input, dim_geo_level){
       # e.g. 8.123
       # e.g. -111.100
       # Basic formula is... length of the string left of the deimal + 1 (for the decimal) + desired length right of the decimal
-      decimal_pos = str_locate(string = input, pattern = fixed("."))
+      decimal_pos = str_locate(string = transformed_input, pattern = fixed("."))
       decimal_pos = decimal_pos[1,"start"]
       # Warning! Need to screen for input that does not have a decimal point (e.g. 40.00000000 would be stored and input as 40) round_lat_long(40, 3)
       if(is.na(decimal_pos)){
         # This means the input did not contain any decimals. Take the original input and str_c a .0
-        transformed_input = str_c(c(input, ".0"), collapse = "")
-        desired_length = str_length(string = input) + 1 + 3
+        transformed_input = str_c(c(transformed_input, ".0"), collapse = "")
+        desired_length = str_length(string = transformed_input) + 1
 
       }else{
         # do nothing
-        desired_length = decimal_pos + 3
+        desired_length = decimal_pos + 2
 
       }
 
@@ -154,13 +154,13 @@ round_lat_long <- function(input, dim_geo_level){
       # e.g. -111.100
       # Basic formula is... length of the string left of the deimal + 1 (for the decimal) + desired length right of the decimal
 
-      decimal_pos = str_locate(string = input, pattern = fixed("."))
+      decimal_pos = str_locate(string = transformed_input, pattern = fixed("."))
       decimal_pos = decimal_pos[1,"start"]
       # Warning! Need to screen for input that does not have a decimal point (e.g. 40.00000000 would be stored and input as 40) round_lat_long(40, 5)
       if(is.na(decimal_pos)){
         # This means the input did not contain any decimals. Take the original input and str_c a .0
-        transformed_input = str_c(c(input, ".0"), collapse = "")
-        desired_length = str_length(string = input) + 1 + 3
+        transformed_input = str_c(c(transformed_input, ".0"), collapse = "")
+        desired_length = str_length(string = transformed_input) + 2
 
       }else{
         # do nothing
